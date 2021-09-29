@@ -2,7 +2,6 @@ import Vue from 'vue'
 import { Line,Pie,Doughnut } from 'vue-chartjs'
 import Chart from "chart.js";
 
-Chart.defaults.global.legend.display = false;
 
 Vue.component('line-chart', {
   extends: Line,
@@ -23,6 +22,15 @@ Vue.component('doughnut-chart', {
   extends: Doughnut,
   props: ['data', 'options'],
   mounted () {
+    Chart.defaults.global.legend.display = false;
+    this.renderChart(this.data, this.options)
+  }
+})
+Vue.component('doughnut-chart-legends', {
+  extends: Doughnut,
+  props: ['data', 'options'],
+  mounted () {
+    Chart.defaults.global.legend.display = true;
     this.renderChart(this.data, this.options)
   }
 })

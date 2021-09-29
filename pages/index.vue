@@ -143,6 +143,93 @@
           </v-col>
         </v-row>
 
+        <v-row>
+          <v-col cols="12" lg="6" md="6">
+          <v-card>
+            <v-card-title class="font-montserrat">Source of Opt-ins</v-card-title>
+            <v-card-text class="d-flex justify-center align-center">
+              <doughnut-chart-legends style="width: 350px" :data="chartData1"></doughnut-chart-legends>
+            </v-card-text>
+          </v-card>
+          </v-col>
+          <v-col cols="12" lg="6" md="6">
+            <v-card>
+              <v-card-title class="font-montserrat">Opt-in Status</v-card-title>
+              <v-card-text class="d-flex justify-center align-center">
+                <doughnut-chart-legends style="width: 350px" :data="chartData1"></doughnut-chart-legends>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="12" md="6" lg="6" sm="6">
+            <v-card text>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-card text style="background-color: #44a88b; border-radius: 10px">
+                        <v-card-text class="d-flex justify-center align-center font-montserrat" style="color: white; font-size: 40px;">
+                          <span class="mt-12 mb-10" style="font-weight: bold">60</span>
+                        </v-card-text>
+                        <v-card-actions class="d-flex justify-center align-center" style="color: white">
+                          <span class="font-nunito mb-10" style="font-size: 19px">Outbound Messages this month.</span>
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-card text style="border-radius: 10px">
+                        <v-card-title class="font-montserrat">Subscriber Growth</v-card-title>
+                        <v-card-text class="d-flex justify-center align-center">
+                          <line-chart  style="width: 280px" :data="dataSetLineChart"></line-chart>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="6" lg="6" sm="6">
+            <v-card
+            >
+              <v-list three-line>
+                <template v-for="(item, index) in itemsNotifications">
+                  <v-subheader
+                    v-if="item.header"
+                    :key="item.header"
+                    v-text="item.header"
+                    class="font-nunito"
+                  ></v-subheader>
+
+                  <v-divider
+                    v-else-if="item.divider"
+                    :key="index"
+                    :inset="item.inset"
+                  ></v-divider>
+
+                  <v-list-item
+                    v-else
+                    :key="item.title"
+                  >
+                    <v-list-item-avatar>
+                      <v-img :src="item.avatar"></v-img>
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title class="font-montserrat" v-html="item.title"></v-list-item-title>
+                      <v-list-item-subtitle class="font-raleway" v-html="item.subtitle"></v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+
       </v-container>
     </v-col>
   </v-row>
@@ -151,6 +238,45 @@
 export default {
   data() {
     return {
+      dataSetLineChart: {
+        labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+        datasets: [
+          {
+            label: "Population (millions)",
+            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+            data: [2478,5267,734,784,433]
+          }
+        ]
+      },
+      options: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'Predicted world population (millions) in 2050'
+        }
+      },
+      chartData1: {
+        labels: [
+          'Uploaded',
+          'API',
+          'Other'
+        ],
+        options: {
+          legend: {
+            display: false
+          },
+        },
+        datasets: [{
+          label: 'My First Dataset',
+          data: [85.8, 14.2,0.1],
+          backgroundColor: [
+            '#3f51b5',
+            '#ff5722',
+            '#2196f3'
+          ],
+          hoverOffset: 4
+        }]
+      },
       chartData: {
         labels: [
           'Red',
@@ -171,7 +297,51 @@ export default {
           ],
           hoverOffset: 4
         }]
-      }
+      },
+      itemsNotifications: [
+        {header: 'Most Recent Campaigns'},
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+          title: 'Brunch this weekend?',
+          subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
+        },
+        {divider: true, inset: true},
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+          subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
+        },
+        {divider: true, inset: true},
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+          title: 'Oui oui',
+          subtitle: '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
+        },
+        {divider: true, inset: true},
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+          title: 'Birthday gift',
+          subtitle: '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
+        },
+        {divider: true, inset: true},
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+          title: 'Recipe to try',
+          subtitle: '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
+        },
+        {divider: true, inset: true},
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+          title: 'Recipe to try',
+          subtitle: '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
+        },
+        {divider: true, inset: true},
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+          title: 'Recipe to try',
+          subtitle: '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
+        },
+      ],
     };
   }
 }

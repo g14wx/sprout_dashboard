@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,200;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
+.background-blue-gradient{
+  background-image: linear-gradient(to bottom, #1e88e5, #1e88e5, #1e88e5, #1e88e5, #1e88e5);
+}
+.background-btn-green{
+    background-color:#00cdbe !important;
+}
+.font-nunito{
+font-family: 'Nunito',sans-serif;
+}
+
+.font-raleway{
+  font-family: 'Raleway', sans-serif;
+}
+
+.font-montserrat{
+  font-family: 'Montserrat', sans-serif;
+}
+.highlighted{
+  color: aqua !important;
+}
+
+.rounded-corners{
+  border-radius: 10px !important;
+}
+
+.black-app-bar{
+  background-color:#272727 !important;
+}
+
+.bakground-theme{
+  background-color: #111111 !important;
+}
